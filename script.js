@@ -10,21 +10,46 @@ let bookName;
 const myLibrary = [];
 
 //Constructor function to create "book" objects
-function Book() {}
-
-//Function to store the "book" objects into the array
-function addBookToLibrary() {
-  myLibrary.push(bookName);
-  displayBook(bookName);
+function Book(title, author, pages, readStatus) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.readStatus = readStatus;
+  this.info = function () {
+    return (
+      this.title +
+      " by " +
+      this.author +
+      ", " +
+      this.pages +
+      ", " +
+      this.readStatus
+    );
+  };
+  // displayBook(bookName);
 }
 
 //Function to display books
 function displayBook(bookName) {
-  console.log(bookName);
   const body = document.body;
   const libraryBody = document.getElementById("library-body");
   const bookContainer = document.createElement("div");
-  bookContainer.innerHTML = bookName;
+  const title = document.createElement("h3");
+  title.innerHTML = bookName.title;
+  const author = document.createElement("p");
+  author.textContent = "Author: ";
+  const pages = document.createElement("p");
+  pages.textContent = "Pages: ";
+  const status = document.createElement("p");
+  status.textContent = "Status: ";
+
+  author.append(bookName.author);
+  pages.append(bookName.pages);
+  status.append(bookName.readStatus);
+  bookContainer.append(title);
+  bookContainer.append(author);
+  bookContainer.append(pages);
+  bookContainer.append(status);
   bookContainer.classList.add("book-container");
   libraryBody.append(bookContainer);
   body.append(libraryBody);
@@ -62,13 +87,20 @@ form.addEventListener("submit", function (event) {
   ).value;
 
   form.reset();
+  dialog.close();
 
-  console.log("Book Title:", bookTitle);
-  console.log("Author Name:", authorName);
-  console.log("Page Number:", pageNumber);
-  console.log("Read Status:", readStatus);
+  bookName = new Book(bookTitle, authorName, pageNumber, readStatus);
+  console.log(bookName);
+  myLibrary.push(bookName);
+  displayBook(bookName);
 });
 
+//Function to store the "book" objects into the array
+// function addBookToLibrary() {
+//   myLibrary.push(bookName);
+// }
+
+//Function to close the dialog box using the close 'X' button
 const closeButton = document.getElementById("close");
 closeButton.addEventListener("click", function (event) {
   event.preventDefault();
