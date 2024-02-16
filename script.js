@@ -38,7 +38,7 @@ showBook.addEventListener("click", function () {
 //Dialog Box functionality
 const dialog = document.querySelector("dialog");
 const showButton = document.querySelector("dialog" + "button");
-const closeButton = document.querySelector("dialog button");
+// const closeButton = document.querySelector("dialog button");
 
 //Showing the dialog box on the button click
 addBook.addEventListener("click", function () {
@@ -49,3 +49,29 @@ addBook.addEventListener("click", function () {
 // closeButton.addEventListener("click", function () {
 //   dialog.close();
 // });
+
+const form = document.getElementById("book-form");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const bookTitle = document.getElementById("book-title").value;
+  const authorName = document.getElementById("author-name").value;
+  const pageNumber = document.getElementById("page-number").value;
+  const readStatus = document.querySelector(
+    'input[name = "read-status"]:checked'
+  ).value;
+
+  form.reset();
+
+  console.log("Book Title:", bookTitle);
+  console.log("Author Name:", authorName);
+  console.log("Page Number:", pageNumber);
+  console.log("Read Status:", readStatus);
+});
+
+const closeButton = document.getElementById("close");
+closeButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  dialog.close();
+  form.reset();
+});

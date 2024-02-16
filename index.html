@@ -15,7 +15,8 @@
     </div>
 
     <dialog>
-      <form id="book-form">
+      <form id="book-form" method="dialog">
+        <button id="close">X</button>
         <label for="book-title">Name of the book</label>
         <input
           type="text"
@@ -42,7 +43,7 @@
         <label for="read-status" value="not-read">Not read</label><br />
 
         <button value="cancel" formmethod="dialog">Cancel</button>
-        <button id="confirmBtn" value="default">Confirm</button>
+        <input type="submit" value="confirm" />
       </form>
     </dialog>
 
