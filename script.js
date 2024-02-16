@@ -21,6 +21,13 @@ function addBookToLibrary() {
 //Function to display books
 function displayBook(bookName) {
   console.log(bookName);
+  const body = document.body;
+  const libraryBody = document.getElementById("library-body");
+  const bookContainer = document.createElement("div");
+  bookContainer.innerHTML = bookName;
+  bookContainer.classList.add("book-container");
+  libraryBody.append(bookContainer);
+  body.append(libraryBody);
 }
 
 let showBook = document.getElementById("show");

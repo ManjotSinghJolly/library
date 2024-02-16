@@ -8,7 +8,7 @@
   background-color: beige;
 }
 
-.library-body {
+#library-body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 20px;
