@@ -43,6 +43,10 @@ function displayBook(bookName) {
   const status = document.createElement("p");
   status.textContent = "Status: ";
 
+  const removeButton = document.createElement("button");
+  removeButton.setAttribute("value", "Remove book");
+  removeButton.innerHTML = "Remove Book";
+
   author.append(bookName.author);
   pages.append(bookName.pages);
   status.append(bookName.readStatus);
@@ -50,6 +54,7 @@ function displayBook(bookName) {
   bookContainer.append(author);
   bookContainer.append(pages);
   bookContainer.append(status);
+  bookContainer.append(removeButton);
   bookContainer.classList.add("book-container");
   libraryBody.append(bookContainer);
   body.append(libraryBody);
