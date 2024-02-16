@@ -1,10 +1,10 @@
 let addBook = document.getElementById("add");
 let bookName;
 
-addBook.addEventListener("click", function () {
-  bookName = prompt("Enter a book: ");
-  addBookToLibrary();
-});
+// addBook.addEventListener("click", function () {
+//   bookName = prompt("Enter a book: ");
+//   addBookToLibrary();
+// });
 
 //Array to store the books
 const myLibrary = [];
@@ -34,3 +34,18 @@ let showBook = document.getElementById("show");
 showBook.addEventListener("click", function () {
   console.log(myLibrary);
 });
+
+//Dialog Box functionality
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog" + "button");
+const closeButton = document.querySelector("dialog button");
+
+//Showing the dialog box on the button click
+addBook.addEventListener("click", function () {
+  dialog.showModal();
+});
+
+// //Closing the dialog box by clicking on the "Close" button
+// closeButton.addEventListener("click", function () {
+//   dialog.close();
+// });
