@@ -1,7 +1,7 @@
 let addBook = document.getElementById("add");
 let bookName;
 let removeButton;
-let libraryIndex = 0;
+let readStatus;
 
 // addBook.addEventListener("click", function () {
 //   bookName = prompt("Enter a book: ");
@@ -68,6 +68,8 @@ function displayBook(bookName) {
   libraryBody.append(bookContainer);
   body.append(libraryBody);
 
+  createToggleSwitch(bookContainer);
+
   removeButton.addEventListener("click", function () {
     myLibrary.splice(myLibrary.indexOf(bookName), 1);
     libraryBody.removeChild(bookContainer);
@@ -76,6 +78,8 @@ function displayBook(bookName) {
   indexButton.addEventListener("click", function () {
     console.log(myLibrary.indexOf(bookName));
   });
+
+  // dynamicToggleButton.checked = bookData.toggleButtonState;
 }
 
 //adding function to the removeButton button:
@@ -107,9 +111,18 @@ form.addEventListener("submit", function (event) {
   const bookTitle = document.getElementById("book-title").value;
   const authorName = document.getElementById("author-name").value;
   const pageNumber = document.getElementById("page-number").value;
-  const readStatus = document.querySelector(
-    'input[name = "read-status"]:checked'
-  ).value;
+  // const readStatus = document.querySelector(
+  //   'input[name = "toggle-switch"]:checked'
+  const toggleSwitch = document.getElementById("toggle-switch");
+
+  if (toggleSwitch.checked) {
+    readStatus = "Read";
+    // console.log("The toggle switch is turned on");
+  } else {
+    readStatus = "Not read yet";
+    // console.log("The toggle switch is turned off.");
+  }
+  // ).value;
 
   form.reset();
   dialog.close();
@@ -117,6 +130,7 @@ form.addEventListener("submit", function (event) {
   bookName = new Book(bookTitle, authorName, pageNumber, readStatus);
   console.log(bookName);
   myLibrary.push(bookName);
+
   //When the form is submitted, the displayBook function is called to display the book card.
   displayBook(bookName);
 });
@@ -133,3 +147,36 @@ closeButton.addEventListener("click", function (event) {
   dialog.close();
   form.reset();
 });
+
+// Selecting the toggle switch using JavaScript
+
+// toggleSwitch.addEventListener("click", function () {
+
+// });
+
+// Function to create a book card with toggle switch
+function createToggleSwitch(container) {
+  // Create book card element
+
+  // Create label element
+  const label = document.createElement("label");
+  label.classList.add("switch");
+
+  // Create input element (toggle switch)
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.id = "toggle-switch"; // Set id
+  toggleSwitch.name = "toggle-switch"; // Set name
+
+  // Create span element (slider)
+  const slider = document.createElement("span");
+  slider.classList.add("slider");
+  slider.classList.add("round");
+
+  // Append input and span to label
+  label.appendChild(toggleSwitch);
+  label.appendChild(slider);
+
+  // Append label to book card
+  container.appendChild(label);
+}
