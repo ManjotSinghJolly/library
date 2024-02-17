@@ -1,5 +1,7 @@
 let addBook = document.getElementById("add");
 let bookName;
+let removeButton;
+let libraryIndex = 0;
 
 // addBook.addEventListener("click", function () {
 //   bookName = prompt("Enter a book: ");
@@ -43,9 +45,15 @@ function displayBook(bookName) {
   const status = document.createElement("p");
   status.textContent = "Status: ";
 
-  const removeButton = document.createElement("button");
-  removeButton.setAttribute("value", "Remove book");
+  removeButton = document.createElement("button");
+
   removeButton.innerHTML = "Remove Book";
+
+  //Buton to print the index value of the book object
+  const indexButton = document.createElement("button");
+  indexButton.innerHTML = "Check index";
+
+  // removeButton.setAttribute("data-indexNumber", myLibrary.indexOf(bookName));
 
   author.append(bookName.author);
   pages.append(bookName.pages);
@@ -55,10 +63,22 @@ function displayBook(bookName) {
   bookContainer.append(pages);
   bookContainer.append(status);
   bookContainer.append(removeButton);
+  bookContainer.append(indexButton);
   bookContainer.classList.add("book-container");
   libraryBody.append(bookContainer);
   body.append(libraryBody);
+
+  removeButton.addEventListener("click", function () {
+    myLibrary.splice(myLibrary.indexOf(bookName), 1);
+    libraryBody.removeChild(bookContainer);
+  });
+
+  indexButton.addEventListener("click", function () {
+    console.log(myLibrary.indexOf(bookName));
+  });
 }
+
+//adding function to the removeButton button:
 
 let showBook = document.getElementById("show");
 showBook.addEventListener("click", function () {
@@ -97,6 +117,7 @@ form.addEventListener("submit", function (event) {
   bookName = new Book(bookTitle, authorName, pageNumber, readStatus);
   console.log(bookName);
   myLibrary.push(bookName);
+  //When the form is submitted, the displayBook function is called to display the book card.
   displayBook(bookName);
 });
 
