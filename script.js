@@ -88,10 +88,10 @@ function displayBook(bookName) {
 
 //adding function to the removeButton button:
 
-let showBook = document.getElementById("show");
-showBook.addEventListener("click", function () {
-  console.log(myLibrary);
-});
+// let showBook = document.getElementById("show");
+// showBook.addEventListener("click", function () {
+//   console.log(myLibrary);
+// });
 
 //Dialog Box functionality
 const dialog = document.querySelector("dialog");
