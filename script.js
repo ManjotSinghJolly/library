@@ -45,7 +45,8 @@ function displayBook(bookName) {
 
   removeButton = document.createElement("button");
 
-  removeButton.innerHTML = "Remove Book";
+  removeButton.innerHTML = "Remove book";
+  removeButton.classList.add("remove-book");
 
   //Buton to print the index value of the book object
   const indexButton = document.createElement("button");
@@ -53,6 +54,11 @@ function displayBook(bookName) {
 
   // Button to change the status
   const changeStatus = document.createElement("button");
+  if (bookName.readStatus === "Read") {
+    changeStatus.classList.add("read-book");
+  } else if (bookName.readStatus === "Not read") {
+    changeStatus.classList.add("notread-book");
+  }
   changeStatus.innerHTML = bookName.readStatus;
 
   changeStatus.addEventListener("click", function () {
@@ -88,10 +94,10 @@ function displayBook(bookName) {
 
 //adding function to the removeButton button:
 
-// let showBook = document.getElementById("show");
-// showBook.addEventListener("click", function () {
-//   console.log(myLibrary);
-// });
+let showBook = document.getElementById("show");
+showBook.addEventListener("click", function () {
+  console.log(myLibrary);
+});
 
 //Dialog Box functionality
 const dialog = document.querySelector("dialog");
@@ -152,10 +158,14 @@ closeButton.addEventListener("click", function (event) {
 //Function to toggle a book's read status
 Book.prototype.toggleStatus = function (buttonValue) {
   if (buttonValue.innerHTML === "Read") {
-    buttonValue.innerHTML = "Not Read";
+    buttonValue.innerHTML = "Not read";
+    buttonValue.classList.toggle("notread-book", true); // Add class
+    buttonValue.classList.toggle("read-book", false); // Remove class
     this.readStatus = "Not read";
-  } else if (buttonValue.innerHTML === "Not Read") {
+  } else if (buttonValue.innerHTML === "Not read") {
     buttonValue.innerHTML = "Read";
+    buttonValue.classList.toggle("notread-book", false); // Remove class
+    buttonValue.classList.toggle("read-book", true); // Add class
     this.readStatus = "Read";
   }
 };
