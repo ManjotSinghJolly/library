@@ -1,7 +1,7 @@
 let addBook = document.getElementById("add");
 let bookName;
 let removeButton;
-let readStatus;
+var readStatus;
 
 // addBook.addEventListener("click", function () {
 //   bookName = prompt("Enter a book: ");
@@ -42,8 +42,6 @@ function displayBook(bookName) {
   author.textContent = "Author: ";
   const pages = document.createElement("p");
   pages.textContent = "Pages: ";
-  const status = document.createElement("p");
-  status.textContent = "Status: ";
 
   removeButton = document.createElement("button");
 
@@ -53,22 +51,28 @@ function displayBook(bookName) {
   const indexButton = document.createElement("button");
   indexButton.innerHTML = "Check index";
 
-  // removeButton.setAttribute("data-indexNumber", myLibrary.indexOf(bookName));
+  // Button to change the status
+  const changeStatus = document.createElement("button");
+  changeStatus.innerHTML = bookName.readStatus;
 
+  changeStatus.addEventListener("click", function () {
+    bookName.toggleStatus(changeStatus);
+  });
   author.append(bookName.author);
   pages.append(bookName.pages);
-  status.append(bookName.readStatus);
+
   bookContainer.append(title);
   bookContainer.append(author);
   bookContainer.append(pages);
   bookContainer.append(status);
   bookContainer.append(removeButton);
   bookContainer.append(indexButton);
+  bookContainer.append(changeStatus);
   bookContainer.classList.add("book-container");
   libraryBody.append(bookContainer);
   body.append(libraryBody);
 
-  createToggleSwitch(bookContainer);
+  // calling the function to change the read status
 
   removeButton.addEventListener("click", function () {
     myLibrary.splice(myLibrary.indexOf(bookName), 1);
@@ -111,18 +115,9 @@ form.addEventListener("submit", function (event) {
   const bookTitle = document.getElementById("book-title").value;
   const authorName = document.getElementById("author-name").value;
   const pageNumber = document.getElementById("page-number").value;
-  // const readStatus = document.querySelector(
-  //   'input[name = "toggle-switch"]:checked'
-  const toggleSwitch = document.getElementById("toggle-switch");
-
-  if (toggleSwitch.checked) {
-    readStatus = "Read";
-    // console.log("The toggle switch is turned on");
-  } else {
-    readStatus = "Not read yet";
-    // console.log("The toggle switch is turned off.");
-  }
-  // ).value;
+  const readStatus = document.querySelector(
+    'input[name = "read-status"]:checked'
+  ).value;
 
   form.reset();
   dialog.close();
@@ -154,29 +149,13 @@ closeButton.addEventListener("click", function (event) {
 
 // });
 
-// Function to create a book card with toggle switch
-function createToggleSwitch(container) {
-  // Create book card element
-
-  // Create label element
-  const label = document.createElement("label");
-  label.classList.add("switch");
-
-  // Create input element (toggle switch)
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.id = "toggle-switch"; // Set id
-  toggleSwitch.name = "toggle-switch"; // Set name
-
-  // Create span element (slider)
-  const slider = document.createElement("span");
-  slider.classList.add("slider");
-  slider.classList.add("round");
-
-  // Append input and span to label
-  label.appendChild(toggleSwitch);
-  label.appendChild(slider);
-
-  // Append label to book card
-  container.appendChild(label);
-}
+//Function to toggle a book's read status
+Book.prototype.toggleStatus = function (buttonValue) {
+  if (buttonValue.innerHTML === "Read") {
+    buttonValue.innerHTML = "Not Read";
+    this.readStatus = "Not read";
+  } else if (buttonValue.innerHTML === "Not Read") {
+    buttonValue.innerHTML = "Read";
+    this.readStatus = "Read";
+  }
+};
