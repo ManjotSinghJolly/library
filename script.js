@@ -1,4 +1,4 @@
-//Array to store the books
+//Array to store the book objects
 const myLibrary = [];
 
 // Selecting the button to add books
