@@ -121,15 +121,6 @@ function displayBook(bookName) {
     libraryBody.removeChild(bookContainer);
   });
 
-  //Buton to print the index value of the book object
-  const indexButton = document.createElement("button");
-  indexButton.innerHTML = "Check index";
-  bookContainer.append(indexButton);
-  // Function to check the index number of each individual book in the array
-  indexButton.addEventListener("click", function () {
-    console.log(myLibrary.indexOf(bookName));
-  });
-
   // Adding class for styling of each book card
   bookContainer.classList.add("book-container");
 
