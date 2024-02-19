@@ -129,12 +129,6 @@ function displayBook(bookName) {
   body.append(libraryBody);
 }
 
-// Function for the Show Array button
-let showBook = document.getElementById("show");
-showBook.addEventListener("click", function () {
-  console.log(myLibrary);
-});
-
 // toggleStatus() function on the Book prototype that changes the read status of individual books
 Book.prototype.toggleStatus = function (buttonValue) {
   if (buttonValue.innerHTML === "Read") {
